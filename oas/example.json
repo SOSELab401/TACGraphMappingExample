@@ -1,0 +1,108 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "audio and text transformation",
+        "description": "Convert audio to text by API",
+        "termsOfService": "http://service.com/terms/",
+        "contact": {
+            "name": "API team",
+            "email": "foo@example.com",
+            "url": "http://apiteam.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        },
+        "x-apiClientRegistration": {
+      "url": "http://developer.com/signup"
+    },
+    "x-logo": {
+      "url": "https://api.apis.com/logo.png"
+    },
+    "x-origin": [
+      {
+        "format": "swagger",
+        "url": "https://apis.com/swagger/example.json",
+        "version": "2.0"
+      }
+    ],
+    "x-preferred": true,
+    "x-providerName": "api.com",
+    "x-serviceName": "speech_transformation"
+    },
+    "host": "speech.apis.com",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/speech-to-text": {
+            "post": {
+                "description": "Speech to Text converts audio voice into written text.",
+                "operationId": "speech to text",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "language to transfer",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "audio",
+                        "in": "query",
+                        "description": "audio will be transfered",
+                        "required": true,
+                        "type": "stream"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "text",
+                        "schema": {
+                            "$ref": "#/definitions/text"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "text": {
+            "type": "object",
+            "required": [
+                "confidence",
+                "text",
+                "id"
+            ],
+            "properties": {
+                "id": {
+                	"description": "The identication of text",
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "transcript": {
+                	"description": "The translated text",
+                    "type": "string"
+                },
+                "confidence": {
+                   "description": "A confidence score for the transcript in the range of 0 to 1. Available only for the best alternative and only in results marked as final.",
+                   "type": "string"
+                }
+            }
+        }
+     }
+}
